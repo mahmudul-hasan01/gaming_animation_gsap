@@ -3,6 +3,11 @@
 import React, { useRef, useState } from "react";
 import Button from "./Button";
 import { TiLocationArrow } from "react-icons/ti";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import {ScrollTrigger} from "gsap/all";
+
+gsap.registerPlugin(ScrollTrigger)
 
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(1);
@@ -27,10 +32,61 @@ const Hero = () => {
     setCurrentIndex(upcomingVideoIndex);
   };
 
+  useGSAP(
+    () => {
+      gsap.set("#next-video", { visibility: "visible" });
+      gsap.to("#next-video", {
+        transformOrigin: "center center",
+        scale: 1,
+        width: "100%",
+        height: "100%",
+        duration: 1,
+        ease: "power1.inOut",
+        onStart: () => nextVideoRef.current.play(),
+      });
+      gsap.from("#current-video", {
+        transformOrigin: "center center",
+        scale: 0,
+        duration: 1.5,
+        ease: "power1.inOut",
+      });
+    },
+    {
+      dependencies: [currentIndex],
+      revertOnUpdate: true,
+    }
+  );
+
+  useGSAP(() => {
+    gsap.set("#video-frame", {
+      clipPath: "polygon(14% 0%, 72% 0%, 90% 90%, 0% 100%)",
+      borderRadius: '0 0 40% 10%'
+    })
+    gsap.from("#video-frame", {
+      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+      borderRadius: '0 0 0 0',
+      ease: "power1.inOut",
+      scrollTrigger: {
+        trigger: '#video-frame',
+        start: 'center center',
+        scrub: true
+      }
+    })
+  })
+
   const getVideoSrc = (index) => `videos/hero-${index}.mp4`;
 
   return (
     <div className="relative h-dvh w-screen overflow-x-hidden">
+      {/* {isLoading && (
+        <div className="flex center absolute z-[100] h-dvh w-screen overflow-hidden "> 
+          <div className="three-body">
+            <div className="three-body__dot"></div>
+            <div className="three-body__dot"></div>
+            <div className="three-body__dot"></div>
+          </div>
+        </div>
+      ) } */}
       <div
         id="video-frame"
         className="relative z-10 h-dvh w-screen overflow-hidden rounded-lg"
@@ -86,7 +142,7 @@ const Hero = () => {
               id="watch-trailer"
               title="Watch Trailer"
               leftIcon={<TiLocationArrow />}
-              containerClass="!bg-white flex items-center gap-1 ml-2"
+              containerClass="flex items-center gap-1 ml-2"
             />
           </div>
         </div>
