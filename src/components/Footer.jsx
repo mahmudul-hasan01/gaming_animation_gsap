@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AnimatedTitle = () => {
+const Footer = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const AnimatedTitle = () => {
   );
 };
 
-export default AnimatedTitle;
+export default Footer;

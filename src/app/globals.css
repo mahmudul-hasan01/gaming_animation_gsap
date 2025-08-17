@@ -12,13 +12,12 @@
   --font-mono: var(--font-geist-mono);
 }
 
-
 body {
   /* background: var(--background); */
   width: 100dvw;
   background-color: #dfdff0;
   overflow-x: hidden;
-  font-family: 'General Sans' sans-serif;
+  font-family: "General Sans" sans-serif;
 }
 
 @layer base {
@@ -73,7 +72,9 @@ body {
   width: 30%;
 }
 
-
+.floating-nav {
+  @apply bg-black rounded-lg border;
+}
 
 
 /* CSS */

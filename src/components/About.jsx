@@ -36,8 +36,8 @@ const About = () => {
           title="Disc<b>o</b>ver the world's <br /> largest shared <b>a</b>dventure"
           containerClass="mt-5 !text-black text-center"
         />
-        <div className="about-subtext absolute bottom-[-80dvh] left-1/2 w-full max-w-96 -translate-x-1/2 text-center font-circular-web text-lg md:max-w-[34rem]">
-          <p>The Game of Games Begins-your life, now an epic MMORPG</p>
+        <div className="about-subtext absolute bottom-[-80dvh] left-1/2 w-full max-w-96 -translate-x-1/2 text-center font-circular-web text-lg md:max-w-[34rem] z-10">
+          <p className="text-2xl uppercase font-semibold">The Game of Games Begins-your life, <br /> now an epic MMORPG</p>
           <p className="text-gray-500">
             Zentry unites every player from countless games and platforms, both
             digital and physical, into a unified Play Economy
